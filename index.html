@@ -6,19 +6,18 @@
   <title>How Are You Feeling Today?</title>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
-    (function(){
-      emailjs.init("0lxX39X_GL0RqhMMT");
+    (function() {
+      emailjs.init("0lxX39X_GL0RqhMMT"); // Your Public Key
     })();
   </script>
   <style>
     * {
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #C95959;
-      color: #000000;
+      color: #000;
       margin: 0;
       padding: 0;
       display: flex;
@@ -26,16 +25,15 @@
       align-items: center;
       min-height: 100vh;
     }
-
     header {
       margin: 2rem 1rem 1rem;
       font-size: 2rem;
       font-weight: 700;
       text-align: center;
+      color: white;
     }
-
     main {
-      background: #ffffff;
+      background: #fff;
       padding: 2rem;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(75, 59, 107, 0.2);
@@ -43,13 +41,11 @@
       max-width: 420px;
       margin: 0 1rem;
     }
-
     label {
       display: block;
       margin-top: 1rem;
       font-weight: 600;
     }
-
     select,
     textarea {
       width: 100%;
@@ -60,16 +56,14 @@
       font-size: 1rem;
       font-family: inherit;
     }
-
     textarea {
       resize: vertical;
       min-height: 80px;
     }
-
     button {
       margin-top: 1.5rem;
       background: #C95959;
-      color: #FFFFFF;
+      color: white;
       border: none;
       padding: 0.75rem 1.25rem;
       font-size: 1rem;
@@ -78,37 +72,30 @@
       transition: background 0.3s ease;
       width: 100%;
     }
-
     button:hover {
       background: #a84545;
     }
-
     .response {
       margin-top: 1.5rem;
-      background: #C95959;
-      color: white;
+      background: #fce9e9;
       padding: 1rem;
       border-radius: 12px;
       font-style: italic;
       min-height: 60px;
     }
-
     footer {
       margin: 2rem 1rem;
       font-size: 0.9rem;
-      color: #000000;
+      color: white;
       text-align: center;
     }
-
     @media (max-width: 480px) {
       header {
         font-size: 1.5rem;
       }
-
       main {
         padding: 1.5rem;
       }
-
       button {
         font-size: 0.95rem;
         padding: 0.65rem 1rem;
@@ -163,20 +150,20 @@
 
     saveBtn.addEventListener('click', () => {
       const mood = moodSelect.value;
-      const text = journal.value.trim();
+      const message = journal.value.trim();
       const date = new Date().toLocaleString();
 
       if (!mood) {
-        alert('Please select your mood before sending!');
+        alert('Please select your mood before submitting!');
         return;
       }
 
       emailjs.send("service_h1b4xpu", "template_0a9sga7", {
         mood: mood,
-        message: text || "No message provided.",
+        message: message || "No message provided.",
         date: date
       }).then(() => {
-        alert('Your thoughts have been sent 💜');
+        alert('Your thoughts have been sent 💌');
         journal.value = '';
         moodSelect.value = '';
         responseDiv.textContent = '';
