@@ -8,6 +8,7 @@
   <script>
     (function(){
       emailjs.init("0lxX39X_GL0RqhMMT");
+    })();
   </script>
   <style>
     * {
@@ -68,7 +69,7 @@
     button {
       margin-top: 1.5rem;
       background: #C95959;
-      color:##FFFFFF;
+      color: #FFFFFF;
       border: none;
       padding: 0.75rem 1.25rem;
       font-size: 1rem;
@@ -79,12 +80,13 @@
     }
 
     button:hover {
-      background: #C95959;
+      background: #a84545;
     }
 
     .response {
       margin-top: 1.5rem;
       background: #C95959;
+      color: white;
       padding: 1rem;
       border-radius: 12px;
       font-style: italic;
@@ -120,7 +122,7 @@
     <label for="mood">Select your mood:</label>
     <select id="mood">
       <option value="" disabled selected>Choose one...</option>
-     <option value="happy">😊 Happy</option>
+      <option value="happy">😊 Happy</option>
       <option value="sad">😢 Sad</option>
       <option value="stressed">😣 Stressed</option>
       <option value="excited">🤩 Excited</option>
@@ -149,7 +151,7 @@
       sad: "I'm sorry you're feeling down. Remember, it's okay to take your time and be gentle with yourself.",
       stressed: "Take a deep breath. You’re doing your best and that’s enough. I'm here if you want to talk.",
       excited: "Love that energy! Hope something great is happening or coming your way 🤩",
-      tired: "Make sure to rest and recharge. Your well being matters the most.",
+      tired: "Make sure to rest and recharge. Your well-being matters the most.",
       overwhelmed: "It's okay to step back and take it one thing at a time. You’re stronger than you think.",
       neutral: "Sometimes a calm day is exactly what we need. Hope you find moments of peace."
     };
@@ -165,21 +167,16 @@
       const date = new Date().toLocaleString();
 
       if (!mood) {
-        alert('Please select your mood before saving!');
+        alert('Please select your mood before sending!');
         return;
       }
-
-      const entry = { mood, text, date };
-      let entries = JSON.parse(localStorage.getItem('moodEntries')) || [];
-      entries.push(entry);
-      localStorage.setItem('moodEntries', JSON.stringify(entries));
 
       emailjs.send("service_h1b4xpu", "template_0a9sga7", {
         mood: mood,
         message: text || "No message provided.",
         date: date
       }).then(() => {
-        alert('Your thoughts have been sent and saved 💜');
+        alert('Your thoughts have been sent 💜');
         journal.value = '';
         moodSelect.value = '';
         responseDiv.textContent = '';
